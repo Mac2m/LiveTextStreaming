@@ -4,7 +4,9 @@ import * as signalR from "@microsoft/signalr";
 const divMessages: HTMLDivElement = document.querySelector("#divMessages");
 const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
+const inputZone: HTMLDivElement = document.querySelector("inputZone");
 const username = new Date().getTime();
+let gapi: any;
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
@@ -34,3 +36,36 @@ function send() {
     connection.send("newMessage", username, tbMessage.value)
               .then(() => tbMessage.value = "");
 }
+
+//google sign-in
+
+var element = document.createElement("div");
+    const innerElement: string = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
+                                    <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
+                                    <button id=\"btnSend\">Send</button> \
+                                    <a href=\"#\" onclick=\"signOut();\">Sign out</a>";
+    element.innerHTML = innerElement;
+    
+function init() {
+    gapi.load('auth2', function() {
+      gapi.auth2.init()
+    });
+  }
+
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile().then(inputZone.appendChild(element));
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+  
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        inputZone.removeChild(element);
+        console.log('User signed out.');
+    });
+  }
+
+  

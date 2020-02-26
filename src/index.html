@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>ASP.NET Core SignalR</title>
+    <title>Live text event</title>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <meta name="google-signin-client_id" content="388924489486-97a3959qoguq9hadhbb8ff98otum7e8h.apps.googleusercontent.com">
 </head>
 <body>
     <div id="divMessages" class="messages">
     </div>
-    <div class="input-zone">
-        <label id="lblMessage" for="tbMessage">Message:</label>
-        <input id="tbMessage" class="input-zone-input" type="text" />
-        <button id="btnSend">Send</button>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    
+    <div class="input-zone" id="inputZone">
+        
     </div>
 </body>
 </html>
