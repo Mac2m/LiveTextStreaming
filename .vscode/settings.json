@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "",
+    "appService.defaultWebAppToDeploy": "/subscriptions/9190ff81-3c9f-43fb-9111-e518ba660d52/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/LiveTextStreaming"
+}
