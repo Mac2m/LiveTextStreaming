@@ -4,7 +4,7 @@ import * as signalR from "@microsoft/signalr";
 const divMessages: HTMLDivElement = document.querySelector("#divMessages");
 const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
-const inputZone: HTMLDivElement = document.querySelector("#inputZone");
+let inputZone: HTMLDivElement = document.querySelector("#inputZone");
 const username = new Date().getTime();
 
 const connection = new signalR.HubConnectionBuilder()
@@ -50,12 +50,22 @@ function renderButton() {
     });
 }
   function onSuccess(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        let signoutbtn = document.getElementById('singout').style.display = "block";
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    gapi.load('auth2', function() {
+        let auth2 = gapi.auth2.init({
+          client_id: '388924489486-97a3959qoguq9hadhbb8ff98otum7e8h.apps.googleusercontent.com',
+          fetch_basic_profile: false,
+          scope: 'profile'
+        });
+      
+        // Sign the user in, and then retrieve their ID.
+        auth2.signIn().then(function() {
+          console.log(auth2.currentUser.get().getId());
+          inputZone.innerHTML = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
+        <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
+        <button id=\"btnSend\">Send</button> \
+        <a href=\"#\" onclick=\"signOut()\">Sign out</a>";
+        });
+      });
   }
 
   function onFailure(error) {
@@ -66,8 +76,6 @@ function renderButton() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         inputZone.innerHTML = '';
-        let signoutbtn = document.getElementById('singout').style.display = "none";
-        
         console.log('User signed out.');
     });
   }
