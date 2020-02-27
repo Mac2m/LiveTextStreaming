@@ -3,3 +3,4 @@ node_modules
 bin
 obj/Debug/netcoreapp3.1/LiveTextStreaming.csprojAssemblyReference.cache
 workspace.code-workspace
+obj/Debug/netcoreapp3.0
