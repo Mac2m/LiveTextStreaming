@@ -6,7 +6,7 @@ const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
 const inputZone: HTMLDivElement = document.querySelector("inputZone");
 const username = new Date().getTime();
-let gapi: any;
+var gapi: any;
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
@@ -45,12 +45,6 @@ var element = document.createElement("div");
                                     <button id=\"btnSend\">Send</button> \
                                     <a href=\"#\" onclick=\"signOut();\">Sign out</a>";
     element.innerHTML = innerElement;
-    
-function init() {
-    gapi.load('auth2', function() {
-      gapi.auth2.init()
-    });
-  }
 
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile().then(inputZone.appendChild(element));
