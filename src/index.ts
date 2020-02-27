@@ -38,7 +38,18 @@ function send() {
 
 //google sign-in
 
-  function onSignIn(googleUser) {
+function renderButton() {
+    gapi.signin2.render('gSignIn', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+    });
+}
+  function onSuccess(googleUser) {
         var profile = googleUser.getBasicProfile();
         inputZone.innerHTML = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
         <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
@@ -49,6 +60,10 @@ function send() {
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   }
+
+  function onFailure(error) {
+    alert(error);
+}
   
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
