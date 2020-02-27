@@ -46,13 +46,11 @@ var element = document.createElement("div");
     element.innerHTML = innerElement;
 
   function onSignIn(googleUser) {
-      gapi.client.load('oauth2', 'v2', function() {
         var profile = googleUser.getBasicProfile().then(function() {inputZone.appendChild(element)});
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-      });
   }
   
   function signOut() {
