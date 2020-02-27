@@ -4,7 +4,7 @@ import * as signalR from "@microsoft/signalr";
 const divMessages: HTMLDivElement = document.querySelector("#divMessages");
 const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
-const inputZone: HTMLDivElement = document.querySelector("inputZone");
+const inputZone: HTMLDivElement = document.querySelector("#inputZone");
 const username = new Date().getTime();
 
 const connection = new signalR.HubConnectionBuilder()
