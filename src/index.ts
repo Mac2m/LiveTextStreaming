@@ -51,10 +51,7 @@ function renderButton() {
 }
   function onSuccess(googleUser) {
         var profile = googleUser.getBasicProfile();
-        inputZone.innerHTML = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
-        <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
-        <button id=\"btnSend\">Send</button> \
-        <a href=\"#\" onclick=\"signOut();\">Sign out</a>";
+        let signoutbtn = document.getElementById('singout').style.display = "block";
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
@@ -69,6 +66,8 @@ function renderButton() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         inputZone.innerHTML = '';
+        let signoutbtn = document.getElementById('singout').style.display = "none";
+        
         console.log('User signed out.');
     });
   }
