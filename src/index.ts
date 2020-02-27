@@ -38,16 +38,12 @@ function send() {
 
 //google sign-in
 
-var element = document.createElement("div");
-    const innerElement: string = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
-                                    <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
-                                    <button id=\"btnSend\">Send</button> \
-                                    <a href=\"#\" onclick=\"signOut();\">Sign out</a>";
-    element.innerHTML = innerElement;
-
   function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
-        inputZone.appendChild(element);
+        inputZone.innerHTML = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
+        <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
+        <button id=\"btnSend\">Send</button> \
+        <a href=\"#\" onclick=\"signOut();\">Sign out</a>";
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
@@ -57,7 +53,7 @@ var element = document.createElement("div");
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        inputZone.removeChild(element);
+        inputZone.innerHTML = '';
         console.log('User signed out.');
     });
   }
