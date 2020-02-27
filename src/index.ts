@@ -6,7 +6,7 @@ const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
 const inputZone: HTMLDivElement = document.querySelector("inputZone");
 const username = new Date().getTime();
-var gapi: any;
+declare let gapi: any;
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
