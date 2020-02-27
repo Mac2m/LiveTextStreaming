@@ -23,6 +23,8 @@
     "webpack-cli": "3.2.3"
   },
   "dependencies": {
-    "@microsoft/signalr": "^3.1.0"
+    "@microsoft/signalr": "^3.1.0",
+    "@types/gapi": "0.0.39",
+    "@types/gapi.auth2": "0.0.51"
   }
 }
