@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "target": "es5",
-      "types": ["gapi", "gapi.auth2"]
+      "sourceMap": true,
+      "types": ["gapi", "gapi.auth2"],
     }
 }

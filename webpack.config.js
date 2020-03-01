@@ -2,9 +2,13 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.ts",
+    devtool: 'source-map',
+    entry: [
+        "./src/index.ts"
+    ],
     output: {
         path: path.resolve(__dirname, "wwwroot"),
         filename: "[name].[chunkhash].js",
@@ -28,10 +32,30 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(["wwwroot/*"]),
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
+            inject: false,
+            minify: {
+                except: ["onSignIn", "googleUser","renderInput"]
+            }
+            
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].[chunkhash].css"
         })
-    ]
+    ],
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                sourceMap: true,
+                uglifyOptions: {
+                    mangle: {
+                        keep_fnames: true
+                    },
+                    compress: {
+                        keep_fnames: true
+                    }
+                }
+             })
+        ]
+    }
 };
