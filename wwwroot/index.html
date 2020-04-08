@@ -6,10 +6,10 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="388924489486-97a3959qoguq9hadhbb8ff98otum7e8h.apps.googleusercontent.com">
     
-        <link type="text/css" rel="stylesheet" href="/css/main.f6f9e62c65075d7cee38.css">
+        <link type="text/css" rel="stylesheet" href="/css/main.b6a934e199d6f5413c95.css">
     
     
-        <script type="text/javascript" src="/main.f6f9e62c65075d7cee38.js" defer="defer"></script>
+        <script type="text/javascript" src="/main.b6a934e199d6f5413c95.js" defer="defer"></script>
     
     <script defer="defer">
         function onSignIn(){
@@ -27,10 +27,10 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-        username = profile.getName();
+        username: String = profile.getName();
         isGapiLoaded = true;
         
-        renderInput();
+        renderInput(profile);
         
         }  
     </script>

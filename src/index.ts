@@ -4,13 +4,13 @@ import * as signalR from "@microsoft/signalr";
 var divMessages: HTMLDivElement = document.querySelector("#divMessages");
 var tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
 var inputZone: HTMLDivElement = document.querySelector("#inputZone");
-let googleBtn: HTMLDivElement = document.querySelector(".g-signin2")
-let username;
+let username: string;
+var useravatar;
 var isGapiLoaded: boolean = isGapiLoaded;
-//workaround to prevent renderInput() and onSignIn() from deleting by uglifyjs
-if (username == 1){renderInput(); } 
 
-function renderInput() {
+function renderInput(profile: any) {
+    username = profile.getName();
+    useravatar = profile.getImageUrl();
       inputZone.innerHTML = "<label id=\"lblMessage\" for=\"tbMessage\">Message:</label> \
       <input id=\"tbMessage\" class=\"input-zone-input\" type=\"text\" /> \
       <button id=\"btnSend\">Send</button> \
@@ -46,11 +46,11 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
     .build();
 
-connection.on("messageReceived", (username: string, message: string) => {
+connection.on("messageReceived", (username, message: string) => {
     let m = document.createElement("div");
 
     m.innerHTML =
-        `<div class="message-author">${username}</div><div>${message}</div>`;
+        `<div class="message-author">${username}</div><img src="${useravatar}"><div>${message}</div>`;
 
     divMessages.appendChild(m);
     divMessages.scrollTop = divMessages.scrollHeight;
